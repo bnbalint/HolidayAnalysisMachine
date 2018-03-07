@@ -1,5 +1,4 @@
-import getWeather
-import getLatLon
+from Utils import getWeather, getLatLon
 
 ## Arguments
 CITY = "Palermo"
@@ -17,7 +16,6 @@ outString += "{}, {}\n\n\n".format(MONTH, YEAR)
 LAT, LON = getLatLon.getLatLon(CITY, COUNTRY)
 print("Lat = {}".format(LAT))
 print("Lon = {}\n".format(LON))
-
 
 
 ## get the weather
