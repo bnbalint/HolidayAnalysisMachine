@@ -1,27 +1,15 @@
-# Set up BeautifulSoup
-from bs4 import BeautifulSoup
-from requests import get
-from requests.exceptions import RequestException
+from Utils.soupUtils import getSoup
 
 
 def getLatLon(CITY, COUNTRY):
   webCommand = "https://en.wikipedia.org/wiki/" + CITY
   outString = ""
 
-  ## retrieve the webpage
   try:
-    response = get(webCommand, stream=True)
-    webContent = response.content
+      soup = getSoup(webCommand)
 
-  except RequestException as error:
-    return 'Error during requests to {0} : {1} \nNo location for you!'.format(webCommand, str(error))
-
-  ## create the parser
-  try:
-    soup = BeautifulSoup(webContent, 'html.parser')
-
-  except:
-    return "Failure to convert to minestrone. No location for you!"
+  except Exception as error:
+      return 'Error during requests to {0} : {1} \nNo location for you!'.format(webCommand, str(error))
 
   ## Find the object
   match = soup.find("span", class_="geo")
